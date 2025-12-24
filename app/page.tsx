@@ -1,196 +1,381 @@
 import Link from 'next/link'
-import { FaWrench, FaCar, FaTools, FaTire, FaCheckCircle, FaPhone, FaCalendarAlt } from 'react-icons/fa'
+import {
+  FaPhone,
+  FaCalendarAlt,
+  FaClock,
+  FaTag,
+  FaUsers,
+  FaCog,
+  FaWrench,
+  FaShieldAlt,
+  FaCheckCircle,
+  FaTruck,
+  FaCreditCard,
+  FaStar,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa'
 import TestimonialCard from '@/components/TestimonialCard'
 
 export default function Home() {
-  const services = [
+  const statistics = [
+    {
+      icon: <FaUsers />,
+      title: '15+ Anos de Experiência',
+      description: 'Servindo a comunidade de Praia com dedicação familiar',
+    },
+    {
+      icon: <FaCog />,
+      title: '100% Mecânicos Certificados',
+      description: 'Equipa qualificada com garantia em todas as peças',
+    },
     {
       icon: <FaWrench />,
-      title: 'Mecânica Geral',
-      description: 'Reparações completas para o seu veículo',
-    },
-    {
-      icon: <FaCar />,
-      title: 'Diagnóstico Automóvel',
-      description: 'Identificação precisa de problemas',
-    },
-    {
-      icon: <FaTools />,
-      title: 'Manutenção Preventiva',
-      description: 'Cuidado regular para prolongar a vida do seu veículo',
-    },
-    {
-      icon: <FaTire />,
-      title: 'Pneus & Rodas',
-      description: 'Venda e montagem de pneus profissionais',
+      title: '500+ Serviços por Mês',
+      description: 'Clientes satisfeitos confiam em nós mensalmente',
     },
   ]
 
-  const whyChoose = [
+  const tireProducts = [
     {
-      icon: <FaCheckCircle />,
-      title: 'Experiência Local',
-      text: 'Anos de experiência servindo a comunidade da Praia',
+      tag: 'MAIS VENDIDO',
+      title: 'Desempenho Todas as Estações',
+      description: 'Aderência superior em todas as condições meteorológicas. Perfeito para condução durante todo o ano.',
+      features: [
+        'Vida útil prolongada',
+        'Design eficiente em combustível',
+        'Condução silenciosa e suave',
+      ],
+      originalPrice: 149,
+      currentPrice: 99,
     },
     {
-      icon: <FaCheckCircle />,
-      title: 'Transparência',
-      text: 'Orçamentos claros e sem surpresas',
+      tag: '★ PREMIUM',
+      title: 'Alto Desempenho',
+      description: 'Manuseamento e precisão máximos para carros desportivos e veículos de luxo.',
+      features: [
+        'Aderência máxima em curvas',
+        'Estabilidade em alta velocidade',
+        'Materiais premium',
+      ],
+      originalPrice: 249,
+      currentPrice: 179,
     },
     {
-      icon: <FaCheckCircle />,
-      title: 'Qualidade',
-      text: 'Trabalho profissional com garantia',
+      tag: 'PRONTO INVERNO',
+      title: 'Todo-o-Terreno e Inverno',
+      description: 'Conquiste qualquer condição de estrada com as nossas opções robustas todo-o-terreno.',
+      features: [
+        'Capacidade fora de estrada',
+        'Tração em neve e gelo',
+        'Construção durável',
+      ],
+      originalPrice: 199,
+      currentPrice: 139,
+    },
+  ]
+
+  const tireBenefits = [
+    {
+      icon: <FaShieldAlt />,
+      title: 'Garantia',
+      description: 'Até 130.000 km',
     },
     {
-      icon: <FaCheckCircle />,
-      title: 'Atendimento Próximo',
-      text: 'Empresa familiar com atenção personalizada',
+      icon: <FaWrench />,
+      title: 'Instalação Grátis',
+      description: 'Montagem especializada',
+    },
+    {
+      icon: <FaTag />,
+      title: 'Melhor Preço',
+      description: 'Garantia de melhor preço',
+    },
+    {
+      icon: <FaCalendarAlt />,
+      title: 'No Mesmo Dia',
+      description: 'Serviço disponível',
     },
   ]
 
   const testimonials = [
     {
-      name: 'João Silva',
-      text: 'Excelente serviço! Repararam o meu carro rapidamente e com transparência total. Recomendo!',
+      name: 'João Costa',
+      text: 'Venho aqui há anos. Têm sempre os pneus que preciso em stock e a instalação é impecável. A cobertura da garantia dá-me paz de espírito. Serviço A+!',
       rating: 5,
+      verified: true,
     },
     {
-      name: 'Maria Santos',
-      text: 'Atendimento profissional e preços justos. A CVAutoStyle é a minha oficina de confiança.',
+      name: 'Ana Rodrigues',
+      text: 'Excelente experiência do início ao fim! Ajudaram-me a escolher os pneus perfeitos para o meu SUV. Profissionais, experientes e preços justos. Voltarei com certeza!',
       rating: 5,
+      verified: true,
+    },
+    {
+      name: 'Pedro Santos',
+      text: 'Serviço extraordinário! Os meus pneus de inverno foram instalados rápida e profissionalmente. A equipa explicou tudo claramente e os preços superam todos os concorrentes. Cinco estrelas!',
+      rating: 5,
+      verified: true,
     },
   ]
 
   return (
-    <div>
+    <div className="bg-primary-dark text-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-dark to-primary-light text-white py-20 md:py-32">
+      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-primary-dark via-gray-dark to-primary-dark">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1920')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/90 to-primary-dark/80"></div>
+
+        <div className="container mx-auto px-4 py-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Main Content */}
+            <div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                Mantenha o Seu Carro{' '}
+                <span className="text-secondary">Seguro e Confiável</span> Sem Surpresas
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+                Oficina auto familiar em Praia com mecânicos certificados, preços transparentes e
+                atendimento rápido. Diagnóstico, reparação, manutenção e vendas de pneus – tudo num
+                só lugar.
+              </p>
+
+              {/* Key Selling Points */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="bg-secondary/20 p-3 rounded-lg">
+                    <FaClock className="text-secondary text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">Serviço Rápido</h3>
+                    <p className="text-gray-400">Atendimento no mesmo dia disponível</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-secondary/20 p-3 rounded-lg">
+                    <FaTag className="text-secondary text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">Preços Honestos</h3>
+                    <p className="text-gray-400">Orçamento gratuito sem compromisso</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Link
+                  href="/contactos"
+                  className="bg-secondary hover:bg-secondary-light px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
+                >
+                  <FaCalendarAlt />
+                  Marque o Seu Serviço
+                </Link>
+                <a
+                  href="tel:+238999999999"
+                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
+                >
+                  <FaPhone />
+                  Ligue Agora
+                </a>
+              </div>
+
+              <p className="text-sm text-gray-400">
+                Sem compromisso • Orçamento gratuito • Atendimento imediato
+              </p>
+            </div>
+
+            {/* Right Side - Statistics Cards */}
+            <div className="space-y-4">
+              {statistics.map((stat, index) => (
+                <div
+                  key={index}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="bg-secondary/20 p-3 rounded-lg">
+                      <div className="text-secondary text-2xl">{stat.icon}</div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl mb-2">{stat.title}</h3>
+                      <p className="text-gray-400">{stat.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tire Promotion Section */}
+      <section className="py-20 bg-primary-dark">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+              PROMOÇÃO DE PNEUS PREMIUM
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Os Pneus Perfeitos para o Seu Veículo</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Seleção imbatível de pneus de alta qualidade das principais marcas. Instalação
+              especializada incluída.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {tireProducts.map((product, index) => (
+              <div
+                key={index}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden hover:border-secondary/50 transition"
+              >
+                <div className="bg-gray-800 h-48 flex items-center justify-center">
+                  <FaWrench className="text-6xl text-gray-600" />
+                </div>
+                <div className="p-6">
+                  <span className="inline-block bg-secondary text-white px-3 py-1 rounded text-xs font-semibold mb-3">
+                    {product.tag}
+                  </span>
+                  <h3 className="text-2xl font-bold mb-3">{product.title}</h3>
+                  <p className="text-gray-400 mb-4">{product.description}</p>
+                  <ul className="space-y-2 mb-6">
+                    {product.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-gray-300">
+                        <FaCheckCircle className="text-secondary" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div>
+                      <span className="text-gray-400 line-through text-lg">
+                        ${product.originalPrice}
+                      </span>
+                      <span className="text-3xl font-bold ml-2">${product.currentPrice}</span>
+                    </div>
+                  </div>
+                  <Link
+                    href="/contactos"
+                    className="block w-full bg-secondary hover:bg-secondary-light text-center py-3 rounded-lg font-semibold transition"
+                  >
+                    Saber Mais
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Our Tires */}
+      <section className="py-20 bg-gray-dark">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+            Por Que Escolher os Nossos Pneus?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {tireBenefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-center hover:border-secondary/50 transition"
+              >
+                <div className="bg-secondary/20 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <div className="text-secondary text-2xl">{benefit.icon}</div>
+                </div>
+                <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
+                <p className="text-gray-400">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ready to Update Section */}
+      <section className="py-20 bg-primary-dark">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">CVAutoStyle</h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-100">
-            A sua oficina automóvel de confiança na Praia
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Pronto para Atualizar?</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Obtenha recomendações especializadas de pneus e preços exclusivos. Os nossos
+            especialistas estão prontos para ajudá-lo a encontrar a escolha perfeita.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a
+              href="tel:+238999999999"
+              className="bg-secondary hover:bg-secondary-light px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
+            >
+              <FaPhone />
+              Ligue para Orçamento
+            </a>
             <Link
               href="/contactos"
-              className="bg-secondary hover:bg-secondary-light px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
             >
               <FaCalendarAlt />
               Agendar Serviço
             </Link>
-            <a
-              href="tel:+238999999999"
-              className="bg-white text-primary-dark hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
-            >
-              <FaPhone />
-              Ligar Agora
-            </a>
+          </div>
+          <div className="flex flex-wrap justify-center gap-8 text-gray-400">
+            <div className="flex items-center gap-2">
+              <FaTruck />
+              <span>Entrega Rápida Disponível</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaCreditCard />
+              <span>Opções de Financiamento Flexíveis</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaStar />
+              <span>Seleção das Melhores Marcas</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Serviços em Destaque */}
-      <section className="py-16 bg-gray-50">
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-dark">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-dark">
-            Os Nossos Serviços
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition text-center"
-              >
-                <div className="text-4xl text-secondary mb-4 flex justify-center">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-dark">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
-              </div>
-            ))}
+          <div className="text-center mb-12">
+            <span className="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+              ★ AVALIAÇÕES DOS CLIENTES
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              O Que Dizem os Nossos Clientes
+            </h2>
+            <p className="text-xl text-gray-300">
+              Não confie apenas na nossa palavra – ouça os clientes satisfeitos
+            </p>
           </div>
-          <div className="text-center mt-8">
-            <Link
-              href="/servicos"
-              className="text-secondary hover:text-secondary-light font-semibold text-lg"
-            >
-              Ver todos os serviços →
-            </Link>
-          </div>
-        </div>
-      </section>
 
-      {/* Por que escolher a CVAutoStyle */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-dark">
-            Por que escolher a CVAutoStyle?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyChoose.map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl text-secondary mb-4 flex justify-center">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-dark">{item.title}</h3>
-                <p className="text-gray-600">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testemunhos Resumidos */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-dark">
-            O que dizem os nossos clientes
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard key={index} {...testimonial} />
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Link
-              href="/testemunhos"
-              className="text-secondary hover:text-secondary-light font-semibold text-lg"
-            >
-              Ver mais testemunhos →
-            </Link>
-          </div>
-        </div>
-      </section>
 
-      {/* CTA Final */}
-      <section className="py-16 bg-primary-dark text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pronto para cuidar do seu veículo?
-          </h2>
-          <p className="text-xl mb-8 text-gray-100">
-            Entre em contacto connosco hoje mesmo
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contactos"
-              className="bg-secondary hover:bg-secondary-light px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
-            >
-              <FaCalendarAlt />
-              Agendar Serviço
-            </Link>
-            <a
-              href="tel:+238999999999"
-              className="bg-white text-primary-dark hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition flex items-center justify-center gap-2"
-            >
-              <FaPhone />
-              Ligar Agora
-            </a>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <button className="p-2 hover:bg-white/10 rounded-lg transition">
+              <FaChevronLeft />
+            </button>
+            <span className="text-gray-400">2 / 5</span>
+            <button className="p-2 hover:bg-white/10 rounded-lg transition">
+              <FaChevronRight />
+            </button>
+          </div>
+
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-6 py-3">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} className="text-secondary" />
+                ))}
+              </div>
+              <span className="text-2xl font-bold">4.9/5</span>
+              <span className="text-gray-400">Avaliação Média</span>
+            </div>
+            <p className="text-gray-400 mt-2">De Mais de 500 Clientes Satisfeitos</p>
           </div>
         </div>
       </section>
     </div>
   )
 }
-

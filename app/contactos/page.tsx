@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCheckCircle } from 'react-icons/fa'
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCheckCircle, FaSpinner } from 'react-icons/fa'
+import { supabase } from '@/lib/supabase'
 
 export default function Contactos() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ export default function Contactos() {
     mensagem: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -22,13 +25,30 @@ export default function Contactos() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aqui normalmente enviaria os dados para um backend
-    console.log('Form submitted:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const { data, error: supabaseError } = await supabase
+        .from('contactos')
+        .insert([
+          {
+            nome: formData.nome,
+            telefone: formData.telefone,
+            email: formData.email,
+            servico: formData.servico || null,
+            mensagem: formData.mensagem,
+          },
+        ])
+        .select()
+
+      if (supabaseError) {
+        throw supabaseError
+      }
+
+      setSubmitted(true)
       setFormData({
         nome: '',
         telefone: '',
@@ -36,7 +56,16 @@ export default function Contactos() {
         servico: '',
         mensagem: '',
       })
-    }, 3000)
+
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 5000)
+    } catch (err: any) {
+      console.error('Error submitting form:', err)
+      setError(err.message || 'Erro ao enviar mensagem. Por favor, tente novamente.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const services = [
@@ -76,6 +105,11 @@ export default function Contactos() {
                   <p className="text-green-600 mt-2">
                     Entraremos em contacto em breve.
                   </p>
+                </div>
+              ) : error ? (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                  <p className="text-red-800 font-semibold text-lg">Erro</p>
+                  <p className="text-red-600 mt-2">{error}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -165,9 +199,17 @@ export default function Contactos() {
 
                   <button
                     type="submit"
-                    className="w-full bg-secondary hover:bg-secondary-light text-white px-6 py-4 rounded-lg font-semibold text-lg transition"
+                    disabled={isLoading}
+                    className="w-full bg-secondary hover:bg-secondary-light disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2"
                   >
-                    Enviar Mensagem
+                    {isLoading ? (
+                      <>
+                        <FaSpinner className="animate-spin" />
+                        A enviar...
+                      </>
+                    ) : (
+                      'Enviar Mensagem'
+                    )}
                   </button>
                 </form>
               )}

@@ -27,6 +27,7 @@ Gerar contactos e agendamentos, transmitir confiança, apresentar serviços e fa
 - **TypeScript**
 - **Tailwind CSS**
 - **React Icons**
+- **Supabase** (Banco de dados)
 
 ## 📦 Instalação
 
@@ -41,12 +42,23 @@ cd autoshop
 npm install
 ```
 
-3. Execute o servidor de desenvolvimento:
+3. Configure o Supabase:
+   - Crie uma conta no [Supabase](https://supabase.com)
+   - Crie um novo projeto
+   - Execute o schema SQL em `supabase/schema.sql` no SQL Editor do Supabase
+   - Copie o arquivo `.env.local.example` para `.env.local`
+   - Adicione as suas credenciais do Supabase:
+     ```
+     NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+     ```
+
+4. Execute o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
 
-4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+5. Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
 
 ## 📄 Estrutura do Projeto
 
@@ -68,6 +80,12 @@ npm run dev
 │   ├── Navigation.tsx        # Componente de navegação responsiva
 │   ├── Footer.tsx             # Componente de rodapé
 │   └── TestimonialCard.tsx   # Card de testemunho reutilizável
+├── lib/
+│   └── supabase.ts           # Cliente Supabase
+├── types/
+│   └── database.types.ts     # Tipos TypeScript para o banco de dados
+├── supabase/
+│   └── schema.sql            # Schema SQL para criar a tabela de contactos
 ├── PRD.md                     # Product Requirements Document
 └── TODO.md                    # Checklist de implementação
 ```
@@ -105,6 +123,7 @@ npm run dev
 
 5. **Contactos / Agendamento** (`/contactos`)
    - Formulário completo (nome, telefone, email, serviço, mensagem)
+   - Integração com Supabase para armazenar contactos
    - Click-to-call
    - Google Maps embed
    - Horários de funcionamento
@@ -120,6 +139,7 @@ npm run dev
 - ✅ Performance otimizada (< 3s)
 - ✅ Código modular e escalável
 - ✅ Acessibilidade básica
+- ✅ Integração com Supabase para armazenamento de dados
 
 ## 🎨 Design
 
@@ -202,6 +222,38 @@ npm run dev
 
 - **PRD.md** - Product Requirements Document completo
 - **TODO.md** - Checklist de implementação
+
+## 🗄️ Configuração do Supabase
+
+### Criar a Tabela de Contactos
+
+1. Aceda ao seu projeto no Supabase Dashboard
+2. Vá para **SQL Editor**
+3. Execute o script em `supabase/schema.sql` para criar a tabela `contactos`
+4. A tabela será criada com as seguintes colunas:
+   - `id` (UUID, primary key)
+   - `nome` (TEXT, obrigatório)
+   - `telefone` (TEXT, obrigatório)
+   - `email` (TEXT, obrigatório)
+   - `servico` (TEXT, opcional)
+   - `mensagem` (TEXT, obrigatório)
+   - `created_at` (TIMESTAMP, automático)
+
+### Políticas de Segurança (RLS)
+
+O schema inclui Row Level Security (RLS) configurado para:
+- Permitir que qualquer pessoa insira dados (para formulários públicos)
+- Permitir que o service role leia todos os dados (para acesso administrativo)
+
+### Variáveis de Ambiente
+
+Certifique-se de que o arquivo `.env.local` contém:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+**⚠️ Importante:** Nunca commite o arquivo `.env.local` no Git. Ele já está no `.gitignore`.
 
 ## 📞 Contacto
 
